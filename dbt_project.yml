@@ -6,6 +6,10 @@ name: 'snowflake_demo'
 version: '1.0.0'
 config-version: 2
 
+vars:
+  emp_id: 1
+  emp_name: 'Nitesh'
+
 # This setting configures which "profile" dbt uses for this project.
 profile: 'snowflake_demo'
 
@@ -24,6 +28,10 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+on-run-start: "{{insert_audits('macro audit start')}}"
+
+on-run-end: "{{insert_audits('macro audit end')}}"
+
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -32,7 +40,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
+  pre-hook: "{{insert_audits('macro audit model start')}}"
+
+  post-hook: "{{insert_audits('macro audit model end')}}"
+
   snowflake_demo:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+
+    snowflake:
+      +schema: stagging  

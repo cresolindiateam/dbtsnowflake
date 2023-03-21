@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: sourcename # required
+
+
+    
+    description: 'testing purpose'
+    database: TEMPDFROMPYTHON
+    schema: PUBLIC
+    tables:
+      - name: PYTHONTABLE
+        
+       
+      
+
+     
