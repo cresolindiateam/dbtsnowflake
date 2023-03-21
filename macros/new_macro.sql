@@ -11,3 +11,10 @@
   'hello  {{name}}'
 
 {%- endmacro %}
+
+{% macro new_macro2(name) -%}
+
+
+  'hello  {{name}}'
+
+{%- endmacro %}
